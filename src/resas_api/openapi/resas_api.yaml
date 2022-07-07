@@ -1,54 +1,10 @@
 openapi: 3.0.0
 paths:
-  /generate-hash:
-    post:
-      summary: Generate Hash
-      operationId: api.bcrypt.generate_hash
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  password:
-                    type: string
-                  hash:
-                    type: string
-                required:
-                  - password
-                  - hash
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                password:
-                  type: string
-                cost:
-                  type: integer
-                  default: 10
-                  format: int32
-                  minimum: 4
-                  maximum: 10
-                version:
-                  type: string
-                  enum:
-                    - 2a
-                    - 2b
-                  default: 2a
-              required:
-                - password
-            examples: {}
-        description: ''
-      description: Generate Hash.
+  /population/composition/perYear:
     parameters: []
-  /check-password:
-    post:
-      summary: Check Password
-      operationId: api.bcrypt.check_password
+    get:
+      summary: 人口マップ_人口構成_人口構成
+      operationId: api.v1.population.composition.per_year
       responses:
         '200':
           description: OK
@@ -57,44 +13,64 @@ paths:
               schema:
                 type: object
                 properties:
-                  result:
-                    type: boolean
-                  password:
+                  message:
                     type: string
-                  hash:
-                    type: string
-                required:
-                  - result
-                  - password
-                  - hash
-      description: Check Password.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                hash:
-                  type: string
-                password:
-                  type: string
-              required:
-                - hash
-                - password
-            examples: {}
+                  resule:
+                    type: object
+                    properties:
+                      bundaryYear:
+                        type: integer
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                            data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  year:
+                                    type: integer
+                                  value:
+                                    type: integer
+      description: 人口マップ人口構成_人口構成
+      parameters:
+        - schema:
+            type: string
+            minLength: 1
+            maxLength: 47
+          in: query
+          name: prefCode
+          description: 都道府県コード
+          required: true
+        - schema:
+            type: string
+            default: '-'
+            pattern: '^[0-9]{5}|[-]{1}$'
+          in: query
+          name: cityCode
+          description: 市区町村コード
+        - schema:
+            type: string
+          in: query
+          name: addArea
+          description: 追加エリアコード
 components:
   schemas: {}
   securitySchemes: {}
 info:
-  title: Bcrypt API
-  description: bcryptでパスワードハッシュ化、パスワードとパスワードハッシュのチェックを行うAPI
+  title: RESAS API
+  description: RESAS API
   version: '1.0'
   contact:
     name: ot-nemoto
-    url: 'https://github.com/ot-nemoto/bcrypt-api/issues'
+    url: 'https://github.com/ot-nemoto/resas-api/issues'
     email: nemoto@opentone.co.jp
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
 servers:
-  - url: 'http://localhost:3000/api/v1/bcrypt'
+  - url: 'http://localhost:3000/api/v1'
