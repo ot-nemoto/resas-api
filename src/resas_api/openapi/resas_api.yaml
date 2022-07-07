@@ -42,6 +42,8 @@ paths:
             type: integer
             minLength: 1
             maxLength: 47
+            minimum: 1
+            maximum: 47
           in: query
           name: prefCode
           description: 都道府県コード
@@ -55,6 +57,7 @@ paths:
           description: 市区町村コード
         - schema:
             type: string
+            pattern: '^((([1-9]|[1-3][0-9]|4[0-7])_([0-9]{5})*)[,]?)+$'
           in: query
           name: addArea
           description: 追加エリアコード
