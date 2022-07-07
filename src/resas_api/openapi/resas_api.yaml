@@ -39,7 +39,7 @@ paths:
       description: 人口マップ人口構成_人口構成
       parameters:
         - schema:
-            type: string
+            type: integer
             minLength: 1
             maxLength: 47
           in: query
