@@ -1,0 +1,100 @@
+openapi: 3.0.0
+paths:
+  /generate-hash:
+    post:
+      summary: Generate Hash
+      operationId: api.bcrypt.generate_hash
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  password:
+                    type: string
+                  hash:
+                    type: string
+                required:
+                  - password
+                  - hash
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                cost:
+                  type: integer
+                  default: 10
+                  format: int32
+                  minimum: 4
+                  maximum: 10
+                version:
+                  type: string
+                  enum:
+                    - 2a
+                    - 2b
+                  default: 2a
+              required:
+                - password
+            examples: {}
+        description: ''
+      description: Generate Hash.
+    parameters: []
+  /check-password:
+    post:
+      summary: Check Password
+      operationId: api.bcrypt.check_password
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                  password:
+                    type: string
+                  hash:
+                    type: string
+                required:
+                  - result
+                  - password
+                  - hash
+      description: Check Password.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hash:
+                  type: string
+                password:
+                  type: string
+              required:
+                - hash
+                - password
+            examples: {}
+components:
+  schemas: {}
+  securitySchemes: {}
+info:
+  title: Bcrypt API
+  description: bcryptでパスワードハッシュ化、パスワードとパスワードハッシュのチェックを行うAPI
+  version: '1.0'
+  contact:
+    name: ot-nemoto
+    url: 'https://github.com/ot-nemoto/bcrypt-api/issues'
+    email: nemoto@opentone.co.jp
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'http://localhost:3000/api/v1/bcrypt'
