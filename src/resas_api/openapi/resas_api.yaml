@@ -24,14 +24,10 @@ paths:
                           type: integer
                           minimum: 1
                           maximum: 47
+                          description: 都道府県コード
                         prefName:
                           type: string
-                      required:
-                        - prefCode
-                        - prefName
-                required:
-                  - message
-                  - result
+                          description: 都道府県名
       operationId: api.v1.common.prefectures
       description: 指定された都道府県に関する都道府県データを返します。
   /population/composition/perYear:
@@ -51,12 +47,10 @@ paths:
                     nullable: true
                   result:
                     type: object
-                    required:
-                      - bundaryYear
-                      - data
                     properties:
                       bundaryYear:
                         type: integer
+                        description: 実績値と推計値の区切り年
                       data:
                         type: array
                         items:
@@ -69,6 +63,7 @@ paths:
                                 - 年少人口
                                 - 生産年齢人口
                                 - 老年人口
+                              description: ラベル
                             data:
                               type: array
                               items:
@@ -76,19 +71,15 @@ paths:
                                 properties:
                                   year:
                                     type: integer
+                                    description: 年
                                   value:
                                     type: integer
+                                    description: 人口
                                   rate:
                                     type: number
-                                required:
-                                  - year
-                                  - value
-                          required:
-                            - label
-                            - data
-                required:
-                  - message
-                  - result
+                                    description: |-
+                                      割合
+                                      labelが総人口の場合は存在しません。
               examples: {}
       description: 地域単位、年単位の年齢構成のデータを返します。
       parameters:
@@ -138,18 +129,25 @@ paths:
                         properties:
                           year:
                             type: integer
+                            description: yearLeftで指定された年
                           oldAgeCount:
                             type: integer
+                            description: 65歳以上の老年人口(人)
                           oldAgePercent:
                             type: number
+                            description: 65歳以上の老年人口(パーセント)
                           middleAgeCount:
                             type: integer
+                            description: 15歳～64歳の生産年齢人口(人)
                           middleAgePercent:
                             type: number
+                            description: 15歳～64歳の生産年齢人口(パーセント)
                           newAgeCount:
                             type: integer
+                            description: 0歳～14歳の年少人口(人)
                           newAgePercent:
                             type: number
+                            description: 0歳～14歳の年少人口(パーセント)
                           data:
                             type: array
                             items:
@@ -157,31 +155,43 @@ paths:
                               properties:
                                 class:
                                   type: string
+                                  description: 年齢階級
                                 man:
                                   type: integer
+                                  description: 男性人口(人)
                                 manPercent:
                                   type: number
+                                  description: 男性人口(パーセント)
                                 woman:
                                   type: integer
+                                  description: 女性人口(人)
                                 womanPercent:
                                   type: number
+                                  description: 女性人口(パーセント)
                       yearRight:
                         type: object
                         properties:
                           year:
                             type: integer
+                            description: yearRightで指定された年
                           oldAgeCount:
                             type: integer
+                            description: '老年人口(人). 老年人口 : 65歳以上'
                           oldAgePercent:
                             type: number
+                            description: '老年人口(パーセント). 老年人口 : 65歳以上'
                           middleAgeCount:
                             type: integer
+                            description: '生産年齢人口(人). 生産年齢人口 : 15歳～64歳'
                           middleAgePercent:
                             type: number
+                            description: '生産年齢人口(パーセント). 生産年齢人口 : 15歳～64歳'
                           newAgeCount:
                             type: integer
+                            description: '年少人口(人). 年少人口 : 0歳～14歳'
                           newAgePercent:
                             type: number
+                            description: '年少人口(パーセント). 年少人口 : 0歳～14歳'
                           data:
                             type: array
                             items:
@@ -189,14 +199,19 @@ paths:
                               properties:
                                 class:
                                   type: string
+                                  description: 年齢階級
                                 man:
                                   type: integer
+                                  description: 男性人口(人)
                                 manPercent:
                                   type: number
+                                  description: 男性人口(パーセント)
                                 woman:
                                   type: integer
+                                  description: 女性人口(人)
                                 womanPercent:
                                   type: number
+                                  description: 女性人口(パーセント)
       operationId: api.v1.population.composition.pyramid
       description: 地域単位、年単位の人口ピラミッドデータを返します。
       parameters:
@@ -287,6 +302,7 @@ paths:
                         properties:
                           boundaryYear:
                             type: integer
+                            description: 実績値と将来の推計値の区切り年
                           data:
                             type: array
                             items:
@@ -294,8 +310,10 @@ paths:
                               properties:
                                 year:
                                   type: integer
+                                  description: 年
                                 value:
                                   type: number
+                                  description: 総人口の比率
                       bar:
                         type: object
                         properties:
@@ -306,8 +324,10 @@ paths:
                               properties:
                                 year:
                                   type: integer
+                                  description: 年
                                 sum:
                                   type: number
+                                  description: 総人口の比率（折れ線の総人口の比率と同じデータ）
                                 class:
                                   type: array
                                   items:
@@ -315,8 +335,10 @@ paths:
                                     properties:
                                       label:
                                         type: string
+                                        description: 老年人口 生産年齢人口 年少人口
                                       value:
                                         type: number
+                                        description: 比率
       operationId: api.v1.population.sum.per_year
       tags:
         - 人口マップ / 人口増減
