@@ -30,6 +30,113 @@ paths:
                           description: 都道府県名
       operationId: api.v1.common.prefectures
       description: 指定された都道府県に関する都道府県データを返します。
+  /cities:
+    get:
+      summary: 市区町村一覧
+      tags:
+        - 共通
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        prefCode:
+                          type: integer
+                          description: 都道府県コード
+                        cityCode:
+                          type: string
+                          description: 市区町村コード
+                        cityName:
+                          type: string
+                          description: 市区町村名
+                        bigCityFlag:
+                          type: string
+                          description: |-
+                            特別区・行政区フラグ
+                            value|description
+                            --|--
+                            0|一般の市区町村
+                            1|政令指定都市の区
+                            2|政令指定都市の市
+                            3|東京都23区
+                          enum:
+                            - '0'
+                            - '1'
+                            - '2'
+                            - '3'
+      operationId: api.v1.common.cities
+      description: 指定された都道府県に関する市区町村データを返します。
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 47
+          in: query
+          name: prefCode
+          description: 都道府県コード
+          required: true
+  /oldCities:
+    get:
+      summary: 旧市区町村一覧
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        prefCode:
+                          type: integer
+                          description: 都道府県コード
+                        cityCode:
+                          type: string
+                          description: 市区町村コード
+                        cityName:
+                          type: string
+                          description: 市区町村名
+                        oldCityCode:
+                          type: string
+                          description: 旧市区町村コード
+                        oldCityName:
+                          type: string
+                          description: 旧市区町村名
+      operationId: api.v1.common.old_cities
+      description: 指定された都道府県・市区町村に関する旧市区町村データを返します。
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 47
+          in: query
+          name: prefCode
+          description: 都道府県コード
+          required: true
+        - schema:
+            type: string
+            pattern: '^([0-9]{5}|[-])$'
+          in: query
+          name: cityCode
+          description: 市区町村コード
+          required: true
   /population/composition/perYear:
     parameters: []
     get:
@@ -98,12 +205,7 @@ paths:
           in: query
           name: cityCode
           description: 市区町村コード
-        - schema:
-            type: string
-            pattern: '^((([1-9]|[1-3][0-9]|4[0-7])_([0-9]{5})*)[,]?)+$'
-          in: query
-          name: addArea
-          description: '追加エリアコード<br>他地域と合算した値を取得する際に使用するパラメータです。 「addArea=都道府県コード_市区町村コード」の形式で指定します。 複数指定する場合は「addArea=1_01100,13_13101」などのように、「,」 で各地域のパラメータを区切ります。 都道府県単位で指定する場合、「addArea=1_,13_」の形式で指定します。 最大10個指定でき、11個以上送られてきた場合はステータスコード400を返します。<br>「cityCode」で「すべての市区町村」(-)を選択した場合、addAreaで合算されるのは、都道府県単位の数値となります。 また、「cityCode」でいずれかの市区町村(13101など)を選択した場合、addAreaで合算されるのは、市区町村単位の数値となります。'
+        - $ref: '#/components/parameters/addArea'
       tags:
         - 人口マップ / 人口構成
   /population/composition/pyramid:
@@ -270,12 +372,7 @@ paths:
           name: yearRight
           description: 年度2(右側)
           required: true
-        - schema:
-            type: string
-            pattern: '^((([1-9]|[1-3][0-9]|4[0-7])_([0-9]{5})*)[,]?)+$'
-          in: query
-          name: addArea
-          description: '追加エリアコード<br>他地域と合算した値を取得する際に使用するパラメータです。 「addArea=都道府県コード_市区町村コード」の形式で指定します。 複数指定する場合は「addArea=1_01100,13_13101」などのように、「,」 で各地域のパラメータを区切ります。 都道府県単位で指定する場合、「addArea=1_,13_」の形式で指定します。 最大10個指定でき、11個以上送られてきた場合はステータスコード400を返します。<br>「cityCode」で「すべての市区町村」(-)を選択した場合、addAreaで合算されるのは、都道府県単位の数値となります。 また、「cityCode」でいずれかの市区町村(13101など)を選択した場合、addAreaで合算されるのは、市区町村単位の数値となります。'
+        - $ref: '#/components/parameters/addArea'
       x-internal: false
       tags:
         - 人口マップ / 人口構成
@@ -357,16 +454,19 @@ paths:
           in: query
           name: cityCode
           description: 市区町村コード
-        - schema:
-            type: string
-            pattern: '^((([1-9]|[1-3][0-9]|4[0-7])_([0-9]{5})*)[,]?)+$'
-          in: query
-          name: addArea
-          description: '追加エリアコード<br>他地域と合算した値を取得する際に使用するパラメータです。 「addArea=都道府県コード_市区町村コード」の形式で指定します。 複数指定する場合は「addArea=1_01100,13_13101」などのように、「,」 で各地域のパラメータを区切ります。 都道府県単位で指定する場合、「addArea=1_,13_」の形式で指定します。 最大10個指定でき、11個以上送られてきた場合はステータスコード400を返します。<br>「cityCode」で「すべての市区町村」(-)を選択した場合、addAreaで合算されるのは、都道府県単位の数値となります。 また、「cityCode」でいずれかの市区町村(13101など)を選択した場合、addAreaで合算されるのは、市区町村単位の数値となります。'
+        - $ref: '#/components/parameters/addArea'
 components:
   schemas: {}
   securitySchemes: {}
-  parameters: {}
+  parameters:
+    addArea:
+      name: addArea
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^((([1-9]|[1-3][0-9]|4[0-7])_([0-9]{5})*)[,]?)+$'
+      description: '追加エリアコード<br>他地域と合算した値を取得する際に使用するパラメータです。 「addArea=都道府県コード_市区町村コード」の形式で指定します。 複数指定する場合は「addArea=1_01100,13_13101」などのように、「,」 で各地域のパラメータを区切ります。 都道府県単位で指定する場合、「addArea=1_,13_」の形式で指定します。 最大10個指定でき、11個以上送られてきた場合はステータスコード400を返します。<br>「cityCode」で「すべての市区町村」(-)を選択した場合、addAreaで合算されるのは、都道府県単位の数値となります。 また、「cityCode」でいずれかの市区町村(13101など)を選択した場合、addAreaで合算されるのは、市区町村単位の数値となります。'
 info:
   title: RESAS API
   description: RESAS API
