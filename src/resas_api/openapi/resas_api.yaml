@@ -81,6 +81,364 @@ paths:
           in: query
           name: addArea
           description: 追加エリアコード
+  /population/composition/pyramid:
+    get:
+      summary: 人口ピラミッド
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    message: null
+                    result:
+                      yearLeft:
+                        year: 2020
+                        oldAgeCount: 154117
+                        oldAgePercent: 25.04
+                        middleAgeCount: 340823
+                        middleAgePercent: 55.38
+                        newAgeCount: 67754
+                        newAgePercent: 11.01
+                        data:
+                          - class: 0～4歳
+                            man: 10169
+                            manPercent: 1.65
+                            woman: 9577
+                            womanPercent: 1.56
+                          - class: 5～9歳
+                            man: 11999
+                            manPercent: 1.95
+                            woman: 11054
+                            womanPercent: 1.8
+                          - class: 10～14歳
+                            man: 12697
+                            manPercent: 2.06
+                            woman: 12258
+                            womanPercent: 1.99
+                          - class: 15～19歳
+                            man: 13323
+                            manPercent: 2.16
+                            woman: 12740
+                            womanPercent: 2.07
+                          - class: 20～24歳
+                            man: 14993
+                            manPercent: 2.44
+                            woman: 13907
+                            womanPercent: 2.26
+                          - class: 25～29歳
+                            man: 14336
+                            manPercent: 2.33
+                            woman: 13591
+                            womanPercent: 2.21
+                          - class: 30～34歳
+                            man: 15171
+                            manPercent: 2.47
+                            woman: 14338
+                            womanPercent: 2.33
+                          - class: 35～39歳
+                            man: 16967
+                            manPercent: 2.76
+                            woman: 16243
+                            womanPercent: 2.64
+                          - class: 40～44歳
+                            man: 20124
+                            manPercent: 3.27
+                            woman: 19023
+                            womanPercent: 3.09
+                          - class: 45～49歳
+                            man: 23751
+                            manPercent: 3.86
+                            woman: 22602
+                            womanPercent: 3.67
+                          - class: 50～54歳
+                            man: 20638
+                            manPercent: 3.35
+                            woman: 20092
+                            womanPercent: 3.26
+                          - class: 55～59歳
+                            man: 18170
+                            manPercent: 2.95
+                            woman: 17870
+                            womanPercent: 2.9
+                          - class: 60～64歳
+                            man: 16529
+                            manPercent: 2.69
+                            woman: 16415
+                            womanPercent: 2.67
+                          - class: 65～69歳
+                            man: 17972
+                            manPercent: 2.92
+                            woman: 18595
+                            womanPercent: 3.02
+                          - class: 70～74歳
+                            man: 19635
+                            manPercent: 3.19
+                            woman: 21942
+                            womanPercent: 3.57
+                          - class: 75～79歳
+                            man: 15019
+                            manPercent: 2.44
+                            woman: 17726
+                            womanPercent: 2.88
+                          - class: 80～84歳
+                            man: 9935
+                            manPercent: 1.61
+                            woman: 12712
+                            womanPercent: 2.07
+                          - class: 85～89歳
+                            man: 5135
+                            manPercent: 0.83
+                            woman: 8220
+                            womanPercent: 1.34
+                          - class: 90歳～
+                            man: 1970
+                            manPercent: 0.32
+                            woman: 5256
+                            womanPercent: 0.85
+                      yearRight:
+                        year: 2045
+                        oldAgeCount: 145080
+                        oldAgePercent: 34.64
+                        middleAgeCount: 228005
+                        middleAgePercent: 54.44
+                        newAgeCount: 45754
+                        newAgePercent: 10.92
+                        data:
+                          - class: 0～4歳
+                            man: 7172
+                            manPercent: 1.71
+                            woman: 6817
+                            womanPercent: 1.63
+                          - class: 5～9歳
+                            man: 7844
+                            manPercent: 1.87
+                            woman: 7481
+                            womanPercent: 1.79
+                          - class: 10～14歳
+                            man: 8424
+                            manPercent: 2.01
+                            woman: 8016
+                            womanPercent: 1.91
+                          - class: 15～19歳
+                            man: 9110
+                            manPercent: 2.18
+                            woman: 8593
+                            womanPercent: 2.05
+                          - class: 20～24歳
+                            man: 10359
+                            manPercent: 2.47
+                            woman: 9167
+                            womanPercent: 2.19
+                          - class: 25～29歳
+                            man: 10153
+                            manPercent: 2.42
+                            woman: 9402
+                            womanPercent: 2.24
+                          - class: 30～34歳
+                            man: 10644
+                            manPercent: 2.54
+                            woman: 9821
+                            womanPercent: 2.34
+                          - class: 35～39歳
+                            man: 11514
+                            manPercent: 2.75
+                            woman: 10631
+                            womanPercent: 2.54
+                          - class: 40～44歳
+                            man: 12049
+                            manPercent: 2.88
+                            woman: 11198
+                            womanPercent: 2.67
+                          - class: 45～49歳
+                            man: 12988
+                            manPercent: 3.1
+                            woman: 12020
+                            womanPercent: 2.87
+                          - class: 50～54歳
+                            man: 13256
+                            manPercent: 3.16
+                            woman: 12162
+                            womanPercent: 2.9
+                          - class: 55～59歳
+                            man: 13446
+                            manPercent: 3.21
+                            woman: 12746
+                            womanPercent: 3.04
+                          - class: 60～64歳
+                            man: 14618
+                            manPercent: 3.49
+                            woman: 14128
+                            womanPercent: 3.37
+                          - class: 65～69歳
+                            man: 15743
+                            manPercent: 3.76
+                            woman: 15357
+                            womanPercent: 3.67
+                          - class: 70～74歳
+                            man: 16955
+                            manPercent: 4.05
+                            woman: 17391
+                            womanPercent: 4.15
+                          - class: 75～79歳
+                            man: 13086
+                            manPercent: 3.12
+                            woman: 14514
+                            womanPercent: 3.47
+                          - class: 80～84歳
+                            man: 9435
+                            manPercent: 2.25
+                            woman: 11746
+                            womanPercent: 2.8
+                          - class: 85～89歳
+                            man: 6019
+                            manPercent: 1.44
+                            woman: 8872
+                            womanPercent: 2.12
+                          - class: 90歳～
+                            man: 4720
+                            manPercent: 1.13
+                            woman: 11242
+                            womanPercent: 2.68
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      yearLeft:
+                        type: object
+                        properties:
+                          year:
+                            type: integer
+                          oldAgeCount:
+                            type: integer
+                          oldAgePercent:
+                            type: number
+                          middleAgeCount:
+                            type: integer
+                          middleAgePercent:
+                            type: number
+                          newAgeCount:
+                            type: integer
+                          newAgePercent:
+                            type: number
+                          data:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                class:
+                                  type: string
+                                man:
+                                  type: integer
+                                manPercent:
+                                  type: number
+                                woman:
+                                  type: integer
+                                womanPercent:
+                                  type: number
+                      yearRight:
+                        type: object
+                        properties:
+                          year:
+                            type: integer
+                          oldAgeCount:
+                            type: integer
+                          oldAgePercent:
+                            type: number
+                          middleAgeCount:
+                            type: integer
+                          middleAgePercent:
+                            type: number
+                          newAgeCount:
+                            type: integer
+                          newAgePercent:
+                            type: number
+                          data:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                class:
+                                  type: string
+                                man:
+                                  type: integer
+                                manPercent:
+                                  type: number
+                                woman:
+                                  type: integer
+                                womanPercent:
+                                  type: number
+      operationId: api.v1.population.composition.pyramid
+      description: 人口マップ人口構成_人口ピラミッド
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 47
+          in: query
+          name: prefCode
+          description: 都道府県コード
+          required: true
+        - schema:
+            type: string
+            default: '-'
+            pattern: '^([0-9]{5}|[-])$'
+          in: query
+          name: cityCode
+          description: 市区町村コード
+        - schema:
+            type: integer
+            enum:
+              - 1980
+              - 1985
+              - 1990
+              - 1995
+              - 2000
+              - 2005
+              - 2010
+              - 2015
+              - 2020
+              - 2025
+              - 2030
+              - 2035
+              - 2040
+              - 2045
+          in: query
+          name: yearLeft
+          description: 年度1(左側)
+          required: true
+        - schema:
+            type: integer
+            enum:
+              - 1980
+              - 1985
+              - 1990
+              - 1995
+              - 2000
+              - 2005
+              - 2010
+              - 2015
+              - 2020
+              - 2025
+              - 2030
+              - 2035
+              - 2040
+              - 2045
+          in: query
+          name: yearRight
+          description: 年度2(右側)
+          required: true
+        - schema:
+            type: string
+            pattern: '^((([1-9]|[1-3][0-9]|4[0-7])_([0-9]{5})*)[,]?)+$'
+          in: query
+          name: addArea
+          description: 追加エリアコード
 components:
   schemas: {}
   securitySchemes: {}
