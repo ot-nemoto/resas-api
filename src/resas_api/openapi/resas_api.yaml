@@ -2,7 +2,7 @@ openapi: 3.0.0
 paths:
   /prefectures:
     get:
-      summary: 共通/都道府県一覧
+      summary: 都道府県一覧
       tags:
         - 共通
       responses:
@@ -133,7 +133,7 @@ paths:
   /population/composition/perYear:
     parameters: []
     get:
-      summary: 人口マップ_人口構成_人口構成
+      summary: 人口推移
       operationId: api.v1.population.composition.per_year
       responses:
         '200':
@@ -186,7 +186,7 @@ paths:
                   - message
                   - result
               examples: {}
-      description: 人口マップ人口構成_人口構成
+      description: 人口推移
       parameters:
         - schema:
             type: integer
@@ -211,9 +211,12 @@ paths:
           in: query
           name: addArea
           description: 追加エリアコード
+      tags:
+        - 人口マップ
+        - 人口構成
   /population/composition/pyramid:
     get:
-      summary: 人口マップ人口構成_人口ピラミッド
+      summary: 人口ピラミッド
       responses:
         '200':
           description: OK
@@ -504,7 +507,7 @@ paths:
                                 womanPercent:
                                   type: number
       operationId: api.v1.population.composition.pyramid
-      description: 人口マップ人口構成_人口ピラミッド
+      description: 人口ピラミッド
       parameters:
         - schema:
             type: integer
@@ -570,6 +573,9 @@ paths:
           name: addArea
           description: 追加エリアコード
       x-internal: false
+      tags:
+        - 人口マップ
+        - 人口構成
 components:
   schemas: {}
   securitySchemes: {}
