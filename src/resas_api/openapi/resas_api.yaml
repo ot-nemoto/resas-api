@@ -116,8 +116,7 @@ paths:
           name: addArea
           description: 追加エリアコード
       tags:
-        - 人口マップ
-        - 人口構成
+        - 人口マップ / 人口構成
   /population/composition/pyramid:
     get:
       summary: 人口ピラミッド
@@ -266,15 +265,14 @@ paths:
           description: 追加エリアコード
       x-internal: false
       tags:
-        - 人口マップ
-        - 人口構成
+        - 人口マップ / 人口構成
   /population/sum/perYear:
     get:
       summary: 人口増減率
       responses: {}
       operationId: api.v1.population.sum.per_year
       tags:
-        - 人口マップ/人口増減
+        - 人口マップ / 人口増減
 components:
   schemas: {}
   securitySchemes: {}
@@ -294,9 +292,7 @@ servers:
 tags:
   - name: 共通
     description: 共通
-  - name: 人口マップ
-    description: 人口マップ
-  - name: 人口構成
-    description: 人口マップ/人口構成
-  - name: 人口増減
-    description: 人口マップ/人口増減
+  - name: 人口マップ / 人口構成
+    description: 人口マップ / 人口構成
+  - name: 人口マップ / 人口増減
+    description: 人口マップ / 人口増減
