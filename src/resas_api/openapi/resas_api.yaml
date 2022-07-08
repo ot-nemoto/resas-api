@@ -294,6 +294,10 @@ servers:
   - url: 'http://localhost:3000/api/v1'
 tags:
   - name: 共通
+    description: 共通
   - name: 人口マップ
+    description: 人口マップ
   - name: 人口構成
+    description: 人口マップ/人口構成
   - name: 人口増減
+    description: 人口マップ/人口増減
