@@ -271,11 +271,10 @@ paths:
   /population/sum/perYear:
     get:
       summary: 人口増減率
-      tags:
-        - 人口マップ
-        - 人口増減
       responses: {}
       operationId: api.v1.population.sum.per_year
+      tags:
+        - 人口マップ/人口増減
 components:
   schemas: {}
   securitySchemes: {}
