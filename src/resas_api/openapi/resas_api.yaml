@@ -14,9 +14,12 @@ paths:
                 type: object
                 properties:
                   message:
-                    type: string
-                  resule:
+                    nullable: true
+                  result:
                     type: object
+                    required:
+                      - bundaryYear
+                      - data
                     properties:
                       bundaryYear:
                         type: integer
@@ -27,6 +30,11 @@ paths:
                           properties:
                             label:
                               type: string
+                              enum:
+                                - 総人口
+                                - 年少人口
+                                - 生産年齢人口
+                                - 老年人口
                             data:
                               type: array
                               items:
@@ -36,6 +44,18 @@ paths:
                                     type: integer
                                   value:
                                     type: integer
+                                  rate:
+                                    type: number
+                                required:
+                                  - year
+                                  - value
+                          required:
+                            - label
+                            - data
+                required:
+                  - message
+                  - result
+              examples: {}
       description: 人口マップ人口構成_人口構成
       parameters:
         - schema:
@@ -51,7 +71,7 @@ paths:
         - schema:
             type: string
             default: '-'
-            pattern: '^[0-9]{5}|[-]{1}$'
+            pattern: '^([0-9]{5}|[-])$'
           in: query
           name: cityCode
           description: 市区町村コード
