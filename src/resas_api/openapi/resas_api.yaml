@@ -83,7 +83,7 @@ paths:
           description: 追加エリアコード
   /population/composition/pyramid:
     get:
-      summary: 人口ピラミッド
+      summary: 人口マップ人口構成_人口ピラミッド
       responses:
         '200':
           description: OK
@@ -439,6 +439,7 @@ paths:
           in: query
           name: addArea
           description: 追加エリアコード
+      x-internal: false
 components:
   schemas: {}
   securitySchemes: {}
