@@ -3,7 +3,8 @@ paths:
   /prefectures:
     get:
       summary: 共通/都道府県一覧
-      tags: []
+      tags:
+        - 共通
       responses:
         '200':
           description: OK
