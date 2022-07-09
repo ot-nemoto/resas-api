@@ -50,9 +50,6 @@ paths:
                     items:
                       type: object
                       properties:
-                        prefCode:
-                          type: integer
-                          description: 都道府県コード
                         cityCode:
                           type: string
                           description: 市区町村コード
@@ -88,7 +85,8 @@ paths:
   /oldCities:
     get:
       summary: 旧市区町村一覧
-      tags: []
+      tags:
+        - 共通
       responses:
         '200':
           description: OK
@@ -104,9 +102,6 @@ paths:
                     items:
                       type: object
                       properties:
-                        prefCode:
-                          type: integer
-                          description: 都道府県コード
                         cityCode:
                           type: string
                           description: 市区町村コード
