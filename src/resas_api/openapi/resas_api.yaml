@@ -51,23 +51,8 @@ paths:
               examples: {}
       description: 地域単位、年単位の年齢構成のデータを返します。
       parameters:
-        - schema:
-            type: integer
-            minLength: 1
-            maxLength: 47
-            minimum: 1
-            maximum: 47
-          in: query
-          name: prefCode
-          description: 都道府県コード
-          required: true
-        - schema:
-            type: string
-            default: '-'
-            pattern: '^([0-9]{5}|[-])$'
-          in: query
-          name: cityCode
-          description: 市区町村コード
+        - $ref: '#/components/parameters/prefCode'
+        - $ref: '#/components/parameters/cityCode'
         - $ref: '#/components/parameters/addArea'
       tags:
         - 人口マップ / 人口構成
@@ -178,21 +163,8 @@ paths:
       operationId: api.v1.population.composition.pyramid
       description: 地域単位、年単位の人口ピラミッドデータを返します。
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            maximum: 47
-          in: query
-          name: prefCode
-          description: 都道府県コード
-          required: true
-        - schema:
-            type: string
-            default: '-'
-            pattern: '^([0-9]{5}|[-])$'
-          in: query
-          name: cityCode
-          description: 市区町村コード
+        - $ref: '#/components/parameters/prefCode'
+        - $ref: '#/components/parameters/cityCode'
         - schema:
             type: integer
             enum:
@@ -302,21 +274,8 @@ paths:
         - 人口マップ / 人口増減
       description: 地域単位、年単位の人口増減率情報を返します。
       parameters:
-        - in: query
-          name: prefCode
-          description: 都道府県コード
-          required: true
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 47
-        - schema:
-            type: string
-            default: '-'
-            pattern: '^([0-9]{5}|[-])$'
-          in: query
-          name: cityCode
-          description: 市区町村コード
+        - $ref: '#/components/parameters/prefCode'
+        - $ref: '#/components/parameters/cityCode'
         - $ref: '#/components/parameters/addArea'
   /population/sum/estimate:
     get:
@@ -361,22 +320,122 @@ paths:
       operationId: api.v1.population.sum.estimate
       description: 地域単位、年単位の出生数・死亡数／転入数・転出数の情報を返します。
       parameters:
-        - schema:
-            type: integer
-            minimum: 1
-            maximum: 47
-          in: query
-          name: prefCode
-          description: 都道府県コード
-          required: true
+        - $ref: '#/components/parameters/prefCode'
+        - $ref: '#/components/parameters/cityCode'
+        - $ref: '#/components/parameters/addArea'
+  /population/nature:
+    get:
+      summary: 人口の自然増減
+      tags:
+        - 人口マップ / 人口の自然増減
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      line:
+                        type: object
+                        properties:
+                          boundaryYear:
+                            type: integer
+                          data:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                yearRange:
+                                  type: string
+                                year:
+                                  type: integer
+                                value:
+                                  type: number
+                      bar:
+                        type: object
+                        properties:
+                          boundaryYear:
+                            type: integer
+                          mandata:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                year:
+                                  type: integer
+                                value:
+                                  type: integer
+                          womandata:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                year:
+                                  type: integer
+                                value:
+                                  type: integer
+      operationId: api.v1.population.nature
+      description: 地域単位、年単位の人口自然増減情報を返します。
+      parameters:
+        - $ref: '#/components/parameters/prefCode'
+        - $ref: '#/components/parameters/cityCode'
         - schema:
             type: string
             default: '-'
-            pattern: '^([0-9]{5}|[-])$'
+            enum:
+              - '-'
+              - '5'
+              - '10'
+              - '15'
+              - '20'
+              - '25'
+              - '30'
+              - '35'
+              - '40'
+              - '45'
+              - '50'
+              - '55'
+              - '60'
+              - '65'
+              - '70'
+              - '75'
+              - '80'
+              - '85'
           in: query
-          name: cityCode
-          description: 市区町村コード
-        - $ref: '#/components/parameters/addArea'
+          name: ageFrom
+          description: 表示する年齢(開始)
+        - schema:
+            type: string
+            default: '-'
+            enum:
+              - '-'
+              - '4'
+              - '9'
+              - '14'
+              - '19'
+              - '24'
+              - '29'
+              - '34'
+              - '39'
+              - '44'
+              - '49'
+              - '54'
+              - '59'
+              - '64'
+              - '69'
+              - '74'
+              - '79'
+              - '84'
+              - '89'
+          in: query
+          name: ageTo
+          description: 表示する年齢(終了)
 components:
   schemas: {}
   securitySchemes: {}
@@ -389,6 +448,24 @@ components:
         type: string
         pattern: '^((([1-9]|[1-3][0-9]|4[0-7])_([0-9]{5})*)[,]?)+$'
       description: '追加エリアコード<br>他地域と合算した値を取得する際に使用するパラメータです。 「addArea=都道府県コード_市区町村コード」の形式で指定します。 複数指定する場合は「addArea=1_01100,13_13101」などのように、「,」 で各地域のパラメータを区切ります。 都道府県単位で指定する場合、「addArea=1_,13_」の形式で指定します。 最大10個指定でき、11個以上送られてきた場合はステータスコード400を返します。<br>「cityCode」で「すべての市区町村」(-)を選択した場合、addAreaで合算されるのは、都道府県単位の数値となります。 また、「cityCode」でいずれかの市区町村(13101など)を選択した場合、addAreaで合算されるのは、市区町村単位の数値となります。'
+    prefCode:
+      name: prefCode
+      in: query
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 47
+      description: 都道府県コード
+    cityCode:
+      name: cityCode
+      in: query
+      required: false
+      schema:
+        type: string
+        pattern: '^([0-9]{5}|[-])$'
+        default: '-'
+      description: 市区町村コード
 info:
   title: RESAS API
   description: RESAS API
@@ -407,3 +484,5 @@ tags:
     description: 人口マップ / 人口構成
   - name: 人口マップ / 人口増減
     description: 人口マップ / 人口増減
+  - name: 人口マップ / 人口の自然増減
+    description: 人口マップ / 人口の自然増減
