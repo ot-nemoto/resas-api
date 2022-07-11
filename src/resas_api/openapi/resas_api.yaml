@@ -452,7 +452,8 @@ paths:
   /population/society/forArea:
     get:
       summary: 地域ブロック別純移動数
-      tags: []
+      tags:
+        - 人口マップ / 人口の社会増減
       responses:
         '200':
           description: OK
@@ -562,3 +563,5 @@ tags:
     description: 人口マップ / 人口増減
   - name: 人口マップ / 人口の自然増減
     description: 人口マップ / 人口の自然増減
+　- name: 人口マップ / 人口の社会増減
+    description: 人口マップ / 人口の社会増減
