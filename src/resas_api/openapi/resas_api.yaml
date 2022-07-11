@@ -318,6 +318,65 @@ paths:
           name: cityCode
           description: 市区町村コード
         - $ref: '#/components/parameters/addArea'
+  /population/sum/estimate:
+    get:
+      summary: 出生数・死亡数／転入数・転出数
+      tags:
+        - 人口マップ / 人口増減
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      boundaryYear:
+                        type: integer
+                        description: 実績値と推計値の区切り年
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                              description: ラベル + 総人口・転入数・転出数・出生数・死亡数
+                            data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  year:
+                                    type: integer
+                                    description: 年
+                                  value:
+                                    type: integer
+                                    description: 人口(千人)
+      operationId: api.v1.population.sum.estimate
+      description: 地域単位、年単位の出生数・死亡数／転入数・転出数の情報を返します。
+      parameters:
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 47
+          in: query
+          name: prefCode
+          description: 都道府県コード
+          required: true
+        - schema:
+            type: string
+            default: '-'
+            pattern: '^([0-9]{5}|[-])$'
+          in: query
+          name: cityCode
+          description: 市区町村コード
+        - $ref: '#/components/parameters/addArea'
 components:
   schemas: {}
   securitySchemes: {}
