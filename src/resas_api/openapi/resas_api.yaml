@@ -346,6 +346,7 @@ paths:
                         properties:
                           boundaryYear:
                             type: integer
+                            description: 実績値と将来の推計値の区切り年
                           data:
                             type: array
                             items:
@@ -353,15 +354,23 @@ paths:
                               properties:
                                 yearRange:
                                   type: string
+                                  description: |-
+                                    年度範囲<br>
+                                    市区町村コードが-の場合は0、市区町村コードが-でない場合はyyyy-yyyyの形式
                                 year:
                                   type: integer
+                                  description: |-
+                                    年<br>
+                                    市区町村コードが-の場合は年、市区町村コードが-でない場合はyearRangeの間の値（例:2000-2005の時2003）
                                 value:
                                   type: number
+                                  description: 合計特殊出生率
                       bar:
                         type: object
                         properties:
                           boundaryYear:
                             type: integer
+                            description: 実績値と将来の推計値の区切り年
                           mandata:
                             type: array
                             items:
@@ -369,8 +378,10 @@ paths:
                               properties:
                                 year:
                                   type: integer
+                                  description: 年度
                                 value:
                                   type: integer
+                                  description: 人数(千人)
                           womandata:
                             type: array
                             items:
@@ -378,8 +389,10 @@ paths:
                               properties:
                                 year:
                                   type: integer
+                                  description: 年度
                                 value:
                                   type: integer
+                                  description: 人数(千人)
       operationId: api.v1.population.nature.for_line_bar
       description: 地域単位、年単位の人口自然増減情報を返します。
       parameters:
