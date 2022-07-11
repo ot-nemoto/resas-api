@@ -449,6 +449,69 @@ paths:
           in: query
           name: ageTo
           description: 表示する年齢(終了)
+  /population/society/forArea:
+    get:
+      summary: 地域ブロック別純移動数
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            year:
+                              type: integer
+                              description: 年
+                            positiveAreas:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  areaCode:
+                                    type: string
+                                    description: 増加地域ブロックコード
+                                  areaName:
+                                    type: string
+                                    description: 増加地域ブロック名
+                                  value:
+                                    type: integer
+                                    description: 移動数
+                            negativeAreas:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  areaCode:
+                                    type: string
+                                    description: 減少地域ブロックコード
+                                  areaName:
+                                    type: string
+                                    description: 減少地域ブロック名
+                                  value:
+                                    type: integer
+                                    description: 移動数
+                            total:
+                              type: object
+                              properties:
+                                value:
+                                  type: integer
+                                  description: 純移動数
+      operationId: api.v1.population.society.for_area
+      description: 地域ブロック別純移動数を返します。
+      parameters:
+        - $ref: '#/components/parameters/prefCode'
 components:
   schemas: {}
   securitySchemes: {}
