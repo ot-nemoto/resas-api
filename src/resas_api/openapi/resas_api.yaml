@@ -387,7 +387,6 @@ paths:
         - $ref: '#/components/parameters/cityCode'
         - schema:
             type: string
-            default: '-'
             enum:
               - '-'
               - '5'
@@ -407,6 +406,7 @@ paths:
               - '75'
               - '80'
               - '85'
+            default: '-'
           in: query
           name: ageFrom
           description: 表示する年齢(開始)
@@ -480,9 +480,10 @@ info:
 servers:
   - url: 'http://localhost:3000/api/v1'
 tags:
+  - name: 人口マップ / 人口の自然増減
+    description: 人口マップ / 人口の自然増減
   - name: 人口マップ / 人口構成
     description: 人口マップ / 人口構成
   - name: 人口マップ / 人口増減
     description: 人口マップ / 人口増減
-  - name: 人口マップ / 人口の自然増減
-    description: 人口マップ / 人口の自然増減
+
