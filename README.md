@@ -30,4 +30,4 @@ gunicorn app:app --chdir src/resas_api/
 
 ## API Documents
 
-- https://ot-nemoto.stoplight.io/docs/resas-api/616a7c582b6e6-
+- https://ot-nemoto.stoplight.io/docs/resas-api/95ad77a4e477d-resas-api
