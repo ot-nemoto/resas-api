@@ -380,7 +380,7 @@ paths:
                                   type: integer
                                 value:
                                   type: integer
-      operationId: api.v1.population.nature
+      operationId: api.v1.population.nature.for_line_bar
       description: 地域単位、年単位の人口自然増減情報を返します。
       parameters:
         - $ref: '#/components/parameters/prefCode'
