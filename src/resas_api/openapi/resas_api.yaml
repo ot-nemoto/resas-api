@@ -555,7 +555,7 @@ info:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
 servers:
-  - url: 'http://localhost:3000/api/v1'
+  - url: 'http://127.0.0.1:8080/api/v1'
 tags:
   - name: 人口マップ / 人口構成
     description: 人口マップ / 人口構成
