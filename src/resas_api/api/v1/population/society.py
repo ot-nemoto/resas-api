@@ -16,3 +16,19 @@ def for_area(**kwargs):
         headers=headers)
 
     return response.json()
+
+def for_age_class(**kwargs):
+    pref_code = kwargs.get('prefCode')
+    city_code = kwargs.get('cityCode')
+
+    headers = {
+        'Referer': 'https://resas.go.jp/',
+    }
+
+    url = 'https://resas.go.jp/api/population/society/v1/forAgeClassStackedBar/{pref_code}/{city_code}'
+
+    response = requests.get(
+        url.format(pref_code=pref_code, city_code=city_code),
+        headers=headers)
+
+    return response.json()
