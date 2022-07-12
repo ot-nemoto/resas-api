@@ -578,6 +578,48 @@ paths:
       parameters:
         - $ref: '#/components/parameters/prefCode'
         - $ref: '#/components/parameters/cityCode'
+  /population/society/forAgeClassLine:
+    get:
+      summary: 年齢階級別純移動数の時系列分析
+      tags:
+        - 人口マップ / 人口の社会増減
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                              description: 期間
+                            data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  axisx:
+                                    type: string
+                                    description: 年齢階級
+                                  axisy:
+                                    type: integer
+                                    description: 移動数
+      operationId: api.v1.population.society.for_age_class_line
+      description: 年齢階級別純移動数の時系列分析を返します。
+      parameters:
+        - $ref: '#/components/parameters/prefCode'
+        - $ref: '#/components/parameters/cityCode'
 components:
   schemas: {}
   securitySchemes: {}
