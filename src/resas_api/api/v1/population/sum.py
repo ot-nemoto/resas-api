@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
+import logging
 
 def per_year(**kwargs):
     pref_code = kwargs.get('prefCode')
@@ -21,6 +22,8 @@ def per_year(**kwargs):
         url.format(pref_code=pref_code, city_code=city_code),
         params=payload,
         headers=headers)
+
+    logging.debug('RESAS: {}'.format(response.url))
 
     return response.json()
 
@@ -43,5 +46,7 @@ def estimate(**kwargs):
         url.format(pref_code=pref_code, city_code=city_code),
         params=payload,
         headers=headers)
+
+    logging.debug('RESAS: {}'.format(response.url))
 
     return response.json()

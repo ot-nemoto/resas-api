@@ -1,6 +1,27 @@
 # -*- coding: utf-8 -*-
 
 import connexion
+from logging.config import dictConfig
+
+dictConfig({
+    'version': 1,
+    'handlers': {
+        'consoleHandler': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'consoleFormatter',
+            'stream': 'ext://sys.stdout'
+        },
+    },
+    'root': {
+        'level': 'DEBUG',
+        'handlers': ['consoleHandler']
+    },
+    'formatters': {
+        'consoleFormatter': {
+            'format': '[%(levelname)-5s] - %(message)s'
+        },
+    }
+})
 
 options = {"swagger_ui": True}
 app = connexion.FlaskApp(__name__, specification_dir='openapi/', options=options)

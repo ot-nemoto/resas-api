@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
+import logging
 
 def for_line_bar(**kwargs):
     pref_code = kwargs.get('prefCode')
@@ -17,5 +18,7 @@ def for_line_bar(**kwargs):
     response = requests.get(
         url.format(pref_code=pref_code, city_code=city_code, age_from=age_from, age_to=age_to),
         headers=headers)
+
+    logging.debug('RESAS: {}'.format(response.url))
 
     return response.json()
