@@ -803,7 +803,7 @@ paths:
             default: '-'
           in: query
           name: city_cd
-          description: 市区町村コード
+          description: '市区町村コード<br>参照: https://www.e-stat.go.jp/municipalities/cities/areacode'
         - schema:
             type: string
             enum:
