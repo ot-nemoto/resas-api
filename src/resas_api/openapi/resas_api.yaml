@@ -723,6 +723,105 @@ paths:
           in: query
           name: gender
           description: 性別<br>`0` 総数<br>`1` 男性<br>`2` 女性
+  /population/mesh/chart:
+    get:
+      summary: 人口区分メッシュ度数分布図
+      tags:
+        - 1.人口マップ / 7.人口メッシュ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      prefCode:
+                        type: string
+                        description: 対象の県コード
+                      prefName:
+                        type: string
+                        description: 対象の県名
+                      cityCode:
+                        type: string
+                        description: 対象の市区町村コード
+                      cityName:
+                        type: string
+                        description: 対象の市区町村名
+                      year:
+                        type: string
+                        description: 年
+                      displayMethod:
+                        type: string
+                        description: 表示内容
+                      matter:
+                        type: string
+                        description: 表示方法
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            classification_cd:
+                              type: string
+                              description: 区分ランク
+                            classification_name:
+                              type: string
+                              description: 区分表示名
+                            value1:
+                              type: integer
+                              description: メッシュ数の値
+                            value2:
+                              type: number
+                              description: メッシュ累積度数の値
+                            value3:
+                              type: number
+                              description: 人口累積度数の値
+      operationId: api.v1.population.mesh.chart
+      description: 指定地域に関する、地域人口メッシュ数と人口累積度数を返します。
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: year
+          description: 年度
+          required: true
+        - schema:
+            type: integer
+          in: query
+          name: prefecture_cd
+          description: 都道府県コード<br>`1` 北海道 `2` 青森県 `3` 岩手県 `4` 宮城県 `5` 秋田県 `6` 山形県 `7` 福島県 `8` 茨城県<br>`9` 栃木県 `10` 群馬県 `11` 埼玉県 `12` 千葉県 `13` 東京都 `14` 神奈川県 `15` 新潟県 `16` 富山県<br>`17` 石川県 `18` 福井県 `19` 山梨県 `20` 長野県 `21` 岐阜県 `22` 静岡県 `23` 愛知県 `24` 三重県<br>`25` 滋賀県 `26` 京都府 `27` 大阪府 `28` 兵庫県 `29` 奈良県 `30` 和歌山県 `31` 鳥取県 `32` 島根県<br>`33` 岡山県 `34` 広島県 `35` 山口県 `36` 徳島県 `37` 香川県 `38` 愛媛県 `39` 高知県 `40` 福岡県<br>`41` 佐賀県 `42` 長崎県 `43` 熊本県 `44` 大分県 `45` 宮崎県 `46` 鹿児島県 `47` 沖縄県
+          required: true
+        - schema:
+            type: string
+            pattern: '^([0-9]{5}|[-])$'
+            default: '-'
+          in: query
+          name: city_cd
+          description: 市区町村コード
+        - schema:
+            type: string
+            enum:
+              - '0'
+              - '3'
+            default: '0'
+          in: query
+          name: matter
+          description: 表示内容<br>`0` 総人口<br>`3` 世帯数
+        - schema:
+            type: string
+            enum:
+              - '0'
+              - '1'
+            default: '0'
+          in: query
+          name: displayMethod
+          description: 表示方法<br>`0` 総数<br>`1` 増減数
 components:
   schemas: {}
   securitySchemes: {}
@@ -772,3 +871,6 @@ tags:
   - name: 1.人口マップ / 3.人口の自然増減
   - name: 1.人口マップ / 4.人口の社会増減
   - name: 1.人口マップ / 5.新卒者就職・進学
+  - name: 1.人口マップ / 6.将来人口推計
+  - name: 1.人口マップ / 7.人口メッシュ
+  - name: 1.人口マップ / 8.将来人口メッシュ
