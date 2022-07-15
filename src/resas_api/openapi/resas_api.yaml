@@ -56,6 +56,7 @@ paths:
         - $ref: '#/components/parameters/addArea'
       tags:
         - 人口マップ / 人口構成
+        - 人口マップ / 新卒者就職・進学
   /population/composition/pyramid:
     get:
       summary: 人口ピラミッド
