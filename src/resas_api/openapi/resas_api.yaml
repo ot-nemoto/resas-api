@@ -822,6 +822,94 @@ paths:
           in: query
           name: displayMethod
           description: 表示方法<br>`0` 総数<br>`1` 増減数
+  /population/futureMesh/chart:
+    get:
+      summary: 将来人口区分メッシュ度数分布図
+      tags:
+        - 1.人口マップ / 8.将来人口メッシュ
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      prefCode:
+                        type: string
+                        description: 対象の県コード
+                      prefName:
+                        type: string
+                        description: 対象の県名
+                      cityCode:
+                        type: string
+                        description: 対象の市区町村コード
+                      cityName:
+                        type: string
+                        description: 対象の市区町村名
+                      year:
+                        type: string
+                        description: 年
+                      displayMethod:
+                        type: string
+                        description: 表示方法
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            classification_cd:
+                              type: string
+                              description: 区分ランク
+                            classification_name:
+                              type: string
+                              description: 区分表示名
+                            value1:
+                              type: integer
+                              description: メッシュ数の値
+                            value2:
+                              type: number
+                              description: メッシュ累積度数の値
+                            value3:
+                              type: number
+                              description: 人口累積度数の値
+      operationId: api.v1.population.future_mesh.chart
+      description: 指定地域に関する、地域将来人口メッシュ数と人口累積度数を返します。
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - '2015'
+              - '2020'
+              - '2030'
+              - '2040'
+              - '2050'
+          in: query
+          name: year
+          description: 年度
+          required: true
+        - $ref: '#/components/parameters/prefCode'
+        - schema:
+            type: string
+            pattern: '^([0-9]{5}|[-])$'
+            default: '-'
+          in: query
+          name: city_cd
+          description: '市区町村コード<br>参照: https://www.e-stat.go.jp/municipalities/cities/areacode'
+        - schema:
+            type: string
+            enum:
+              - '0'
+              - '1'
+            default: '0'
+          in: query
+          name: displayMethod
+          description: 表示方法<br>`0` 総数<br>`1` 増減数
 components:
   schemas: {}
   securitySchemes: {}
