@@ -1069,6 +1069,7 @@ paths:
             enum:
               - '1'
               - '2'
+            default: '1'
           in: query
           name: areaType
           description: 表示方法<br>`1` 全国の分布を見る<br>`2` 都道府県内の分布を見る
@@ -1078,6 +1079,7 @@ paths:
               - '1'
               - '2'
               - '3'
+            default: '1'
           in: query
           name: dispType
           description: 表示内容<br>`1` 特化係数（付加価値額）<br>`2` 特化係数（労働生産性）<br>`3` 特化係数（従業者数）
