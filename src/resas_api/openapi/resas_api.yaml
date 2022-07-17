@@ -1051,7 +1051,7 @@ paths:
                             value:
                               type: number
                               description: 特化係数（付加価値額）または特化係数（従業者数）または特化係数（労働生産性）
-      operationId: api.v1.industry.power/for_area
+      operationId: api.v1.industry.power.for_area
       description: 指定された産業の地域ごとの特化係数のグラフ描画用のデータを返します。
       parameters:
         - schema:
