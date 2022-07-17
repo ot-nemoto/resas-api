@@ -1026,33 +1026,64 @@ servers:
   - url: 'http://127.0.0.1:8080/api/v1'
 tags:
   - name: 1.人口マップ / 1.人口構成
+    description: 人口マップ/人口構成
   - name: 1.人口マップ / 2.人口増減
+    description: 人口マップ/人口増減
   - name: 1.人口マップ / 3.人口の自然増減
+    description: 人口マップ/人口の自然増減
   - name: 1.人口マップ / 4.人口の社会増減
+    description: 人口マップ/人口の社会増減
   - name: 1.人口マップ / 5.新卒者就職・進学
+    description: 人口マップ/新卒者就職・進学
   - name: 1.人口マップ / 6.将来人口推計
+    description: 人口マップ/将来人口推計
   - name: 1.人口マップ / 7.人口メッシュ
+    description: 人口マップ/人口メッシュ
   - name: 1.人口マップ / 8.将来人口メッシュ
+    description: 人口マップ/将来人口メッシュ
   - name: 2.産業構造マップ / 1.全産業
+    description: 産業構造マップ/全産業
   - name: 2.産業構造マップ / 2.製造業
+    description: 産業構造マップ/製造解行
   - name: 2.産業構造マップ / 3.小売・卸売業（消費）
+    description: 産業構造マップ/小売・卸売業（消費）
   - name: 2.産業構造マップ / 4.農業
+    description: 産業構造マップ/農業
   - name: 2.産業構造マップ / 5.林業
+    description: 産業構造マップ/林業
   - name: 2.産業構造マップ / 6.水産業
+    description: 産業構造マップ/水産豪
   - name: 3.企業活動マップ / 1.企業情報
+    description: 企業活動マップ/企業情報
   - name: 3.企業活動マップ / 2.海外取引
+    description: 企業活動マップ/海外取引
   - name: 3.企業活動マップ / 3.研修開発
+    description: 企業活動マップ/研究開発
   - name: 4.観光マップ / 1.国内
+    description: 観光マップ/国内
   - name: 4.観光マップ / 2.外国人
+    description: 観光マップ/外国人
   - name: 5.まちづくりマップ / 1.From-to分析（滞在人口）
+    description: まちづくりマップ/From-to分析（滞在人口）
   - name: 5.まちづくりマップ / 2.通勤通学人口
+    description: まちづくりマップ/通勤通学人口
   - name: 5.まちづくりマップ / 3.不動産取引
+    description: まちづくりマップ/不動産取引
   - name: 6.雇用／医療・福祉マップ / 1.一人当たり賃金
+    description: 雇用／医療・福祉マップ/一人当たり賃金
   - name: 6.雇用／医療・福祉マップ / 2.有効求人倍率
+    description: 雇用／医療・福祉マップ/有効求人倍率
   - name: 6.雇用／医療・福祉マップ / 3.求人・求職者
+    description: 雇用／医療・福祉マップ/求人・求職者
   - name: 6.雇用／医療・福祉マップ / 4.医療需給
+    description: 雇用／医療・福祉マップ/医療需給
   - name: 6.雇用／医療・福祉マップ / 5.介護需給
+    description: 雇用／医療・福祉マップ/介護需給
   - name: 7.地方財政マップ / 1.自治体財政状況の比較
+    description: 地方財政マップ/自治体財政状況の比較
   - name: 7.地方財政マップ / 2.一人当たり地方税
+    description: 地方財政マップ/一人当たり地方税
   - name: 7.地方財政マップ / 3.一人当たり市町村民税法人分
+    description: 地方財政マップ/一人当たり市町村民税法人分
   - name: 7.地方財政マップ / 4.一人当たり固定資産税
+    description: 地方財政マップ/一人当たり固定資産税
