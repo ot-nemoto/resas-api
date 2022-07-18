@@ -50,3 +50,28 @@ def for_area(**kwargs):
     logging.debug('RESAS: {}'.format(response.url))
 
     return response.json()
+
+def for_manufacturer_establishments(**kwargs):
+    pref_code = kwargs.get('prefCode')
+    sic_code = kwargs.get('sicCode')
+    simc_code = kwargs.get('simcCode')
+    add_area = list(filter(lambda x: x != '', kwargs.get('addArea', '').split(',')))
+
+    headers = {
+        'Referer': 'https://resas.go.jp/',
+    }
+
+    url = 'https://resas.go.jp/api/industry/power/v1/forManufacturerEstablishmentsLine/{pref_code}/{sic_code}/{simc_code}'
+
+    payload = {}
+    if len(add_area):
+        payload['addArea'] = add_area
+
+    response = requests.get(
+        url.format(pref_code=pref_code, sic_code=sic_code, simc_code=simc_code),
+        params=payload,
+        headers=headers)
+
+    logging.debug('RESAS: {}'.format(response.url))
+
+    return response.json()
