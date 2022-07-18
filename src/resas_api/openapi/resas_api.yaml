@@ -1096,13 +1096,93 @@ paths:
             pattern: '^([0-9]{2}|[-])$'
           in: query
           name: simcCode
-          description: 産業中分類コード<br>
+          description: '産業中分類コード<br>参照: https://www.e-stat.go.jp/classifications/terms/10'
         - schema:
             type: string
             pattern: '^(([A-T]_([0-9]{2})*)[,]?)+$'
           in: query
           name: addIndustry
           description: '産業大分類コードと産業中分類コード<br>他の産業と合算した値を取得する際に使用するパラメータです。 「産業大分類コード_産業中分類コード」の形式で指定します。 最大10個指定出来、11個以上送られてきた場合はステータスコード400を返します。 例えば、1つ目が産業大分類コードのみ、2つ目が産業中分類コードまで選択されている場合は、「addIndustry=A_,A_01」と指定します。'
+  /industry/power/forManufacturerEstablishments:
+    get:
+      summary: 製造業事業所単位分析_継続・参入・退出事業所別の推移
+      tags:
+        - 2.産業構造マップ / 1.全産業
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      prefCode:
+                        type: integer
+                        description: 対象の県コード
+                      prefName:
+                        type: string
+                        description: 対象の県名
+                      sicCode:
+                        type: string
+                        description: 産業大分類コード、取得できない場合は空文字
+                      sicName:
+                        type: string
+                        description: 産業中分類名、取得できない場合は空文字
+                      simcCode:
+                        type: string
+                        description: 産業中分類コード、取得できない場合は空文字
+                      simcName:
+                        type: string
+                        description: 産業大分類名、取得できない場合は空文字
+                      establishments:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                              description: 全事業所、継続、 参入、 退出のいずれか
+                            data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  year:
+                                    type: integer
+                                    description: 年度
+                                  value:
+                                    type: number
+                                    description: 平均付加価値額
+                                  labor:
+                                    type: number
+                                    description: 平均労働生産性
+                                  employee:
+                                    type: number
+                                    description: 平均従業者数
+      operationId: api.v1.industry.power.for_manufacturer_establishments
+      description: 指定された地域および産業の継続・参入・退出事業所別の推移データを返します。
+      parameters:
+        - $ref: '#/components/parameters/prefCode'
+        - schema:
+            type: string
+            pattern: '^([A-T]|[-])$'
+            default: '-'
+          in: query
+          name: sicCode
+          description: '産業大分類コード<br>参照: https://www.e-stat.go.jp/classifications/terms/10'
+        - schema:
+            type: string
+            pattern: '^([0-9]{2}|[-])$'
+            default: '-'
+          in: query
+          name: simcCode
+          description: '産業中分類コード<br>参照: https://www.e-stat.go.jp/classifications/terms/10'
+        - $ref: '#/components/parameters/addArea'
 components:
   schemas: {}
   securitySchemes: {}
