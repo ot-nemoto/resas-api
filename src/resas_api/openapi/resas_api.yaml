@@ -1303,6 +1303,66 @@ paths:
         - $ref: '#/components/parameters/cityCode'
         - $ref: '#/components/parameters/sicCode'
         - $ref: '#/components/parameters/simcCode'
+  /municipality/employee/perYear:
+    get:
+      summary: 従業者数（事業所単位）
+      tags:
+        - 2.産業構造マップ / 1.全産業
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      prefCode:
+                        type: integer
+                        description: 対象の県コード
+                      prefName:
+                        type: string
+                        description: 対象の県名
+                      cityCode:
+                        type: string
+                        description: 対象の市区町村コード
+                      cityName:
+                        type: string
+                        description: 対象の市区町村名
+                      sicName:
+                        type: string
+                        description: 産業大分類名、取得できない場合は空文字
+                      sicCode:
+                        type: string
+                        description: 産業大分類コード、取得できない場合は空文字
+                      simcName:
+                        type: string
+                        description: 産業中分類名、取得できない場合は空文字
+                      simcCode:
+                        type: string
+                        description: 産業中分類コード、取得できない場合は空文字
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            year:
+                              type: integer
+                              description: 年
+                            value:
+                              type: integer
+                              description: 従業者数（事業所単位）
+      operationId: api.v1.municipality.employee.per_year
+      description: 地域単位、年単位の従業者数（事業所単位）のデータを返します。
+      parameters:
+        - $ref: '#/components/parameters/prefCode'
+        - $ref: '#/components/parameters/cityCode'
+        - $ref: '#/components/parameters/sicCode'
+        - $ref: '#/components/parameters/simcCode'
 components:
   schemas: {}
   securitySchemes: {}
