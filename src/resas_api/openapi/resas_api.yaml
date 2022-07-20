@@ -1435,6 +1435,72 @@ paths:
         - $ref: '#/components/parameters/cityCode'
         - $ref: '#/components/parameters/sicCode'
         - $ref: '#/components/parameters/simcCode'
+  /municipality/labor/perYear:
+    get:
+      summary: 労働生産性（企業単位）
+      tags:
+        - 2.産業構造マップ / 1.全産業
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    nullable: true
+                  result:
+                    type: object
+                    properties:
+                      prefCode:
+                        type: integer
+                        description: 対象の県コード
+                      prefName:
+                        type: string
+                        description: 対象の県名
+                      cityCode:
+                        type: string
+                        description: 対象の市区町村コード
+                      cityName:
+                        type: string
+                        description: 対象の市区町村名
+                      sicName:
+                        type: string
+                        description: 産業大分類名、取得できない場合は空文字
+                      simcName:
+                        type: string
+                        description: 産業中分類名、取得できない場合は空文字
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            year:
+                              type: integer
+                              description: 年
+                            value:
+                              type: integer
+                              description: 労働生産性（企業単位）. 秘匿の場合はNULL
+                            concealmentFlg:
+                              type: integer
+                              description: '秘匿か否か. 秘匿ではない場合0, 秘匿の場合1. (秘匿のデータ=Xのデータ)'
+      operationId: api.v1.municipality.labor.per_year
+      description: 地域単位、年単位の労働生産性（企業単位）のデータを返します。
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - '2012'
+              - '2016'
+          in: query
+          name: year
+          description: 年
+          required: true
+        - $ref: '#/components/parameters/prefCode'
+        - $ref: '#/components/parameters/cityCode'
+        - $ref: '#/components/parameters/sicCode'
+        - $ref: '#/components/parameters/simcCode'
 components:
   schemas: {}
   securitySchemes: {}
