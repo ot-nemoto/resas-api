@@ -1700,7 +1700,6 @@ paths:
           in: query
           name: unit
           description: 表示単位<br>`1` 実数で表示する<br>`2` 人口あたりで表示する<br>`3` 従業者1人あたりで表示する<br>`4` 1事業所あたりで表示する
-        - $ref: '#/components/parameters/sicCode'
         - $ref: '#/components/parameters/simcCode'
         - $ref: '#/components/parameters/addArea'
 components:
