@@ -1,7 +1,7 @@
 openapi: 3.0.0
 paths:
   /population/composition/transition:
-    get:
+    post:
       summary: 人口推移
       operationId: api.v1.population.composition.transition
       responses:
