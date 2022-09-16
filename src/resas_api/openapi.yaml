@@ -69,6 +69,7 @@ paths:
                       minItems: 1
                       maxItems: 10
                       uniqueItems: true
+                      description: 都道府県コード
                       items:
                         $ref: '#/components/schemas/pref_code'
                   required:
@@ -79,6 +80,7 @@ paths:
                       minItems: 1
                       maxItems: 10
                       uniqueItems: true
+                      description: 市区町村コード
                       items:
                         $ref: '#/components/schemas/city_code'
                   required:
