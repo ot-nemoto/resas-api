@@ -143,7 +143,7 @@ paths:
         - $ref: '#/components/parameters/addArea'
       tags:
         - 1.人口マップ / 1.人口構成
-  /population/composition/pyramid:
+  /population/composition/pyramids:
     get:
       summary: 人口ピラミッド
       responses:
@@ -247,7 +247,7 @@ paths:
                                 womanPercent:
                                   type: number
                                   description: 女性人口(パーセント)
-      operationId: api.v1.population.composition.pyramid
+      operationId: api.v1.population.composition.pyramids
       description: 地域単位、年単位の人口ピラミッドデータを返します。
       parameters:
         - $ref: '#/components/parameters/prefCode'
@@ -298,6 +298,7 @@ paths:
       x-internal: false
       tags:
         - 1.人口マップ / 1.人口構成
+    parameters: []
   /population/sum/perYear:
     get:
       summary: 人口増減率
