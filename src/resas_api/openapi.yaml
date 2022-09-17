@@ -272,24 +272,12 @@ paths:
               oneOf:
                 - properties:
                     pref_code:
-                      type: array
-                      minItems: 1
-                      maxItems: 10
-                      uniqueItems: true
-                      description: 都道府県コード
-                      items:
-                        $ref: '#/components/schemas/pref_code'
+                      $ref: '#/components/schemas/pref_code'
                   required:
                     - pref_code
                 - properties:
                     city_code:
-                      type: array
-                      minItems: 1
-                      maxItems: 10
-                      uniqueItems: true
-                      description: 市区町村コード
-                      items:
-                        $ref: '#/components/schemas/city_code'
+                      $ref: '#/components/schemas/city_code'
                   required:
                     - city_code
               type: object
@@ -333,118 +321,6 @@ paths:
                     - city_code
               type: object
     parameters: []
-  /population/sum/perYear:
-    get:
-      summary: 人口増減率
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    nullable: true
-                  result:
-                    type: object
-                    properties:
-                      line:
-                        type: object
-                        properties:
-                          boundaryYear:
-                            type: integer
-                            description: 実績値と将来の推計値の区切り年
-                          data:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                year:
-                                  type: integer
-                                  description: 年
-                                value:
-                                  type: number
-                                  description: 総人口の比率
-                      bar:
-                        type: object
-                        properties:
-                          data:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                year:
-                                  type: integer
-                                  description: 年
-                                sum:
-                                  type: number
-                                  description: 総人口の比率（折れ線の総人口の比率と同じデータ）
-                                class:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      label:
-                                        type: string
-                                        description: 老年人口 生産年齢人口 年少人口
-                                      value:
-                                        type: number
-                                        description: 比率
-      operationId: api.v1.population.sum.per_year
-      tags:
-        - 1.人口マップ / 2.人口増減
-      description: 地域単位、年単位の人口増減率情報を返します。
-      parameters:
-        - $ref: '#/components/parameters/prefCode'
-        - $ref: '#/components/parameters/cityCode'
-        - $ref: '#/components/parameters/addArea'
-  /population/sum/estimate:
-    get:
-      summary: 出生数・死亡数／転入数・転出数
-      tags:
-        - 1.人口マップ / 2.人口増減
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    nullable: true
-                  result:
-                    type: object
-                    properties:
-                      boundaryYear:
-                        type: integer
-                        description: 実績値と推計値の区切り年
-                      data:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            label:
-                              type: string
-                              description: ラベル + 総人口・転入数・転出数・出生数・死亡数
-                            data:
-                              type: array
-                              items:
-                                type: object
-                                properties:
-                                  year:
-                                    type: integer
-                                    description: 年
-                                  value:
-                                    type: integer
-                                    description: 人口(千人)
-      operationId: api.v1.population.sum.estimate
-      description: 地域単位、年単位の出生数・死亡数／転入数・転出数の情報を返します。
-      parameters:
-        - $ref: '#/components/parameters/prefCode'
-        - $ref: '#/components/parameters/cityCode'
-        - $ref: '#/components/parameters/addArea'
   /population/nature:
     get:
       summary: 人口の自然増減
