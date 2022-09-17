@@ -294,48 +294,9 @@ paths:
                     - city_code
               type: object
     parameters: []
-  /population/sum/transition_scatter_plot:
-    post:
-      summary: 自然増減・社会増減の推移
-      operationId: api.v1.population.sum.transition_scatter_plot
-      responses:
-        '200':
-          description: OK
-      tags:
-        - 1.人口マップ / 2.人口増減
-      description: 地域単位の自然増減・社会増減の推移を返します。
-      requestBody:
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - properties:
-                    pref_code:
-                      type: array
-                      minItems: 1
-                      maxItems: 10
-                      uniqueItems: true
-                      description: 都道府県コード
-                      items:
-                        $ref: '#/components/schemas/pref_code'
-                  required:
-                    - pref_code
-                - properties:
-                    city_code:
-                      type: array
-                      minItems: 1
-                      maxItems: 10
-                      uniqueItems: true
-                      description: 市区町村コード
-                      items:
-                        $ref: '#/components/schemas/city_code'
-                  required:
-                    - city_code
-              type: object
-    parameters: []
   /population/sum/transition_bar_line:
     post:
-      summary: 人口増減数の推移
+      summary: 自然増減・社会増減の推移
       operationId: api.v1.population.sum.transition_bar_line
       responses:
         '200':
