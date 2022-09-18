@@ -95,5 +95,5 @@ def transition_bar_line(**kwargs):
 
     return {
         'params': body,
-        'result': response.json().get('result'),
+        'result': response.json().get('result').get('bar'),
     }
