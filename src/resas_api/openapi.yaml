@@ -13,17 +13,6 @@ paths:
                 type: object
                 properties:
                   params:
-                    oneOf:
-                      - properties:
-                          perf_code:
-                            type: array
-                            items:
-                              type: string
-                      - properties:
-                          city_code:
-                            type: array
-                            items:
-                              type: string
                     type: object
                   result:
                     type: object
@@ -100,21 +89,6 @@ paths:
                 type: object
                 properties:
                   params:
-                    oneOf:
-                      - properties:
-                          perf_code:
-                            type: array
-                            items:
-                              type: string
-                          year:
-                            type: integer
-                      - properties:
-                          city_code:
-                            type: array
-                            items:
-                              type: string
-                          year:
-                            type: integer
                     type: object
                   result:
                     type: object
@@ -224,6 +198,39 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  params:
+                    type: object
+                  result:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            year:
+                              type: integer
+                            sum:
+                              type: number
+                              description: 総人口
+                            class:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  label:
+                                    type: string
+                                    enum:
+                                      - 老年人口
+                                      - 生産年齢人口
+                                      - 年少人口
+                                  value:
+                                    type: number
       tags:
         - 1.人口マップ / 2.人口増減
       description: 地域単位の人口増減を返します。
@@ -255,6 +262,7 @@ paths:
                   required:
                     - city_code
               type: object
+        description: ''
   /population/sum/sum_line:
     post:
       summary: 出生数・死亡数 / 転入数・転出数
@@ -262,6 +270,40 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  params:
+                    type: object
+                  result:
+                    type: object
+                    properties:
+                      boundaryYear:
+                        type: integer
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                              enum:
+                                - 総人口
+                                - 出生数
+                                - 死亡数
+                                - 転入数
+                                - 転出数
+                            data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  year:
+                                    type: integer
+                                  value:
+                                    type: integer
       tags:
         - 1.人口マップ / 2.人口増減
       description: 地域単位の出生数、死亡数、転入数、転出数を返します。
@@ -289,6 +331,38 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  params:
+                    type: object
+                  result:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            year:
+                              type: integer
+                            sum:
+                              type: integer
+                              description: 人口増減数
+                            class:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  label:
+                                    type: string
+                                    enum:
+                                      - 社会増減数
+                                      - 自然増減数
+                                  value:
+                                    type: integer
       tags:
         - 1.人口マップ / 2.人口増減
       description: 地域単位の人口増減数の推移を返します。
